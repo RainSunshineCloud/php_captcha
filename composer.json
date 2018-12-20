@@ -1,8 +1,8 @@
 {
-    "name": "rain-sunshine-cloud/php_captcha",
+    "name": "rain_sunshine_cloud/php_captcha",
     "authors": [
         {
-            "name": "rain-sunshine-cloud",
+            "name": "RainSunshineCloud",
             "email": "931035553@qq.com"
         }
     ],
@@ -11,7 +11,7 @@
     },
     "autoload": {
         "psr-4": {
-            "rain-sunshine-cloud\\php_captcha\\": "src/"
+            "RainSunshineCloud\\php_captcha\\": "src/"
         }
     }
 }

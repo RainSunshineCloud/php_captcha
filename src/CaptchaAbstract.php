@@ -36,12 +36,13 @@ abstract class CaptchaAbstract
 
     /**
      * 创建验证码
-     * @param  string
+     * @param  string 键
+     * @param  string 值
      * @return string 验证码文本
      */
-    protected function create($filepath = '')
+    protected function create(string $key,string $filepath = '')
     {
-        $this->createFontImages();
+        $this->createFontImages($key);
         $this->resizeImage();
         $this->createDot(self::$pixel_num);
         $this->createLine(self::$line_num);
@@ -51,28 +52,31 @@ abstract class CaptchaAbstract
 
     /**
      * 验证图片验证码
-     * @param  [string] $key  [存储使用的键]
      * @param  [string] $code [验证码]
+     * @param  [string] $key  [存储使用的键]
+     * @param  [bool]   $is_case_sense [大小写敏感]
      * @return [bool] 
      */
-    protected function verify(string $key,string $code) {
+    protected function verify(string $code, string $key, bool $is_case_sense = false) {
         if (empty($code)) {
             throw new CaptchaException('请输入验证码',1);
         }
 
-        if ($code == $this->getstoreText($key)) {
-            $this->deleteStoreText($key);
-            return true;
+        $res = false;
+        if ($is_case_sense) {
+            if ($code == $this->getstoreText($key)) $res = true;
+        } else {
+           if (strtolower($code) == strtolower($this->getstoreText($key))) $res = true;
         }
 
         $this->deleteStoreText($key);
-        return false;
+        return $res;
     }
 
     /*
     *生成字体图像
     */
-    protected function createFontImages()
+    protected function createFontImages($key)
     {
         $font_size_width = self::$font_size * self::$num *1.4;
         $font_size_height = self::$font_size * 1.6;
@@ -95,7 +99,7 @@ abstract class CaptchaAbstract
             $i++;
         }
 
-        $this->storeText(self::$choose_text);
+        $this->storeText($key,self::$choose_text);
     }
 
     /**
@@ -281,10 +285,11 @@ abstract class CaptchaAbstract
 
     /**
      * 存储验证码
+     * @param  string $key  [键]
      * @param  string $text [验证码]
      * @return [bool]       
      */
-    protected abstract  function storeText(string $text);
+    protected abstract  function storeText(string $key, string $text);
 
     /**
      * 获取存储的字符串

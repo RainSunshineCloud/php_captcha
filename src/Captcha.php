@@ -2,29 +2,26 @@
 
 class Captcha extends CaptchaAbstract
 {
-    protected function storeText(string $text) 
+    public function __construct()
     {
-        $res = file_put_contents('./file.log',$text);
-        if (!$res) {
-            throw new CaptchaException('存储验证码失败');
-        }
+        session_status() != 2 && session_start();
+    }
+    protected function storeText(string $key,string $text) 
+    {
+        
+        $_SESSION[$key] = $text;
     }
 
     protected function getstoreText(string $key) 
     {
-        $res = file_get_contents('./file.log');
-        if (!$res) {
-            throw new CaptchaException('获取验证码失败');
+        if (isset($_SESSION[$key])) {
+             return $_SESSION[$key];
         }
-        return $res;
+       throw new CaptchaException('获取失败');
     }
 
     protected function deleteStoreText(string $key)
     {
-        $res = file_put_contents('./file.log','');
-
-        if (!$res) {
-            throw new CaptchaException('删除验证码失败');
-        }
+        unset($_SESSION[$key]);
     }
 }

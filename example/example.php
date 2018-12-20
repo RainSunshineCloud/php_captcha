@@ -1,6 +1,6 @@
 <?php
-include '../CaptchaAbstract.php';
-include '../Captcha.php';
+include '../src/CaptchaAbstract.php';
+include '../src/Captcha.php';
 
 try {   
     $res = new Captcha();
@@ -10,11 +10,11 @@ try {
     $res->setHeight(100);
     $res->setChooseText('all_alpha-number');
     $res->setTextnum(5);
-    $res->setPixelNum(1200);
-    $res->setLineNum(10);
-
-    $res -> create();
-    // $res = $res->getStoreText('key','ru8y');
+    $res->setPixelNum(120);
+    $res->setLineNum(2);
+    $key = 'skdjfk';
+    // $res ->create($key);
+    $bool = $res->verify('ed6mu',$key);
 } catch (\CaptchaException $e) {
     echo $e->getmessage();
 }

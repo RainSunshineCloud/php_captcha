@@ -1,5 +1,5 @@
 <?php
-namespace 'RainSunshineCloud/Captcha';
+namespace RainSunshineCloud\Captcha;
 
 class Captcha extends CaptchaAbstract
 {

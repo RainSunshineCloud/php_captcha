@@ -1,0 +1,10 @@
+{
+    "name": "administrator/captcha",
+    "authors": [
+        {
+            "name": "ryanwu",
+            "email": "931035553@qq.com"
+        }
+    ],
+    "require": {}
+}

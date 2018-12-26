@@ -1,6 +1,7 @@
 <?php
-include '../src/CaptchaAbstract.php';
-include '../src/Captcha.php';
+require_once '../../../vendor/autoload.php';
+use RainSunshineCloud\Captcha;
+use RainSunshineCloud\CaptchaException;
 
 try {   
     $res = new Captcha();

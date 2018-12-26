@@ -18,7 +18,7 @@ class Captcha extends CaptchaAbstract
         if (isset($_SESSION[$key])) {
              return $_SESSION[$key];
         }
-       throw new CaptchaException('获取失败');
+       throw new CaptchaException('获取失败',3);
     }
 
     protected function deleteStoreText(string $key)

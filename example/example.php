@@ -16,6 +16,6 @@ try {
     $key = 'skdjfk';
     // $res ->create($key);
     $bool = $res->verify('ed6mu',$key);
-} catch (\CaptchaException $e) {
+} catch (CaptchaException $e) {
     echo $e->getmessage();
 }
